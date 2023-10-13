@@ -6,6 +6,7 @@ import uz.pcmarket.online.domain.utils.Role;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -19,12 +20,17 @@ public class User {
     @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false,unique = true)
+    @OneToOne(optional = false)
+    private Address address;
+
+    @Column(nullable = false, unique = true)
     private String phone;
 
-    @Builder.Default
-    private Role role=Role.GUEST;
+    @Column(nullable = false,unique = true)
+    private String email;
 
-    @OneToOne
-    private Address address;
+    @Builder.Default
+    private Role role = Role.CLIENT;
+
+
 }

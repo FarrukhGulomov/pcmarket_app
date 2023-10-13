@@ -17,6 +17,9 @@ public class Attachment {
     private Long id;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private String contentType;
 
     @Column(nullable = false)

@@ -19,7 +19,7 @@ public class AttachmentContent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private byte bytes;
+    private byte[] bytes;
 
     @OneToOne
     private Attachment attachment;
