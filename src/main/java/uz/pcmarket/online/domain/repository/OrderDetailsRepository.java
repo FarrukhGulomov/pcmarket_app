@@ -7,12 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import uz.pcmarket.online.domain.entity.OrderDetails;
+import uz.pcmarket.online.domain.projection.OrderDetailsInfo;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RepositoryRestResource(path = "orderDetails")
+@RepositoryRestResource(path = "orderDetails",excerptProjection = OrderDetailsInfo.class)
 public interface OrderDetailsRepository extends JpaRepository<OrderDetails, Long> {
     @RestResource(path = "/calculateTotal")
 
