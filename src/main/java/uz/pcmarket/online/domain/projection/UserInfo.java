@@ -1,11 +1,10 @@
 package uz.pcmarket.online.domain.projection;
 
-import jakarta.persistence.*;
-import lombok.Builder;
 import org.springframework.data.rest.core.config.Projection;
 import uz.pcmarket.online.domain.entity.Address;
+import uz.pcmarket.online.domain.entity.Bucket;
 import uz.pcmarket.online.domain.entity.User;
-import uz.pcmarket.online.domain.utils.Role;
+import uz.pcmarket.online.domain.entity.enums.Role;
 
 @Projection(types = User.class)
 public interface UserInfo {
@@ -13,6 +12,7 @@ public interface UserInfo {
     Long getId();
 
     String getFullName();
+    String getUsername();
 
     Address getAddress();
 
@@ -21,5 +21,7 @@ public interface UserInfo {
     String getEmail();
 
     Role getRole();
+
+    Bucket getBucket();
 
 }

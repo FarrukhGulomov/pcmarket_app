@@ -16,4 +16,6 @@ public interface ProductInfo extends GeneralInfo {
     Category getCategory();
     Attachment getPhoto();
     BigDecimal getPrice();
+
+
 }

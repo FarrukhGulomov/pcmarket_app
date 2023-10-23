@@ -1,4 +1,4 @@
-package uz.pcmarket.online.domain.utils;
+package uz.pcmarket.online.domain.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

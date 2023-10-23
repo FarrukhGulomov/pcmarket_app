@@ -2,10 +2,10 @@ package uz.pcmarket.online.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pcmarket.online.domain.utils.Role;
+import org.hibernate.annotations.Cascade;
+import uz.pcmarket.online.domain.entity.enums.Role;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,17 +20,23 @@ public class User {
     @Column(nullable = false)
     private String fullName;
 
+    @Column(nullable = false, unique = true)
+    private String username;
+
     @OneToOne(optional = false)
     private Address address;
 
     @Column(nullable = false, unique = true)
     private String phone;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Builder.Default
+    @Enumerated(EnumType.STRING)
     private Role role = Role.CLIENT;
-
+    
+    @OneToOne(mappedBy = "user")
+    private Bucket bucket;
 
 }

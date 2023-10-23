@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Builder
 @Entity
 @Table(name = "product")
 public class Product extends AbsEntity {
@@ -23,8 +22,7 @@ public class Product extends AbsEntity {
     @OneToMany
     private List<Attachment> photos;
 
-    @Builder.Default
-    private BigDecimal price = BigDecimal.ZERO;
+    private Double price=0.0;
 
 
 }
