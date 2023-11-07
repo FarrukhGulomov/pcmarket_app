@@ -1,17 +1,19 @@
 package uz.pcmarket.online.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import uz.pcmarket.online.domain.entity.enums.Currency;
 import uz.pcmarket.online.domain.entity.enums.Measurement;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 public class OrderDetails {
     @Id
@@ -25,9 +27,9 @@ public class OrderDetails {
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
+    @Transient
     private Measurement measurement = Measurement.QUANTITY;
-
-    @ManyToOne
-    private Order order;
+    @Transient
+    private Currency currency = Currency.UZS;
 
 }

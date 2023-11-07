@@ -23,8 +23,8 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @OneToOne(optional = false)
-    private Address address;
+
+    private String address;
 
     @Column(nullable = false, unique = true)
     private String phone;

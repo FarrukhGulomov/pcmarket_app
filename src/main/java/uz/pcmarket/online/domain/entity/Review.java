@@ -1,30 +1,30 @@
 package uz.pcmarket.online.domain.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+import java.time.LocalDateTime;
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Address {
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String region;
-
+    private String fullName;
+    private Integer rating;
     @Column(nullable = false)
-    private String district;
+    private String comment;
 
-    @Column(nullable = false)
-    private String street;
+    private LocalDateTime creationDate;
 
-    @Column(nullable = false)
-    private String buildingNumber;
+    @ManyToOne
+    private Product product;
 }

@@ -18,20 +18,32 @@ public class Bucket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    @JoinColumn(name = "buckets_id")
-    private List<OrderDetails> orderDetails;
+
 
     @Column(nullable = false)
+    @Getter(AccessLevel.NONE)
     private Double total = 0D;
+
 
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name ="user_id")
     private User user;
+
+    @OneToMany
+    private List<OrderDetails> orderDetailsList;
+
 
     @Column(nullable = false)
     private boolean active = true;
 
     @Transient
     private Currency currency=Currency.UZS;
+
+    public Double getTotal() {
+
+        for (OrderDetails orderDetails : orderDetailsList) {
+            this.total+= orderDetails.getProduct().getPrice();
+        }
+        return total;
+    }
 }

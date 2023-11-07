@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 import uz.pcmarket.online.domain.entity.enums.Currency;
+import uz.pcmarket.online.domain.entity.enums.Measurement;
 import uz.pcmarket.online.domain.entity.enums.OrderStatus;
 
 import java.io.Serializable;
@@ -28,20 +29,38 @@ public class Order {
     private Long id;
     @ManyToOne(optional = false)
     private User user;
+    @Getter(AccessLevel.NONE)
+    @Setter
+    @Formula("get_total()") // not best way
+    private Double total=0D;
 
-
-    private Double total=0.0;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus=OrderStatus.NEW;
+    private OrderStatus orderStatus = OrderStatus.NEW;
 
     @Builder.Default
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdDate = Timestamp.valueOf(LocalDateTime.now());
 
-    @OneToMany(mappedBy = "order")
-    private List<OrderDetails> orderDetails;
 
-    @Transient
-    private Currency currency=Currency.UZS;
+    @ManyToMany
+    private List<OrderDetails> orderDetailsList;
+
+
+    public Double getTotal() {
+
+        for (OrderDetails orderDetails : orderDetailsList) {
+        total+= orderDetails.getProduct().getPrice()*orderDetails.getAmount();
+        }
+        return total;
+    }
+
+
 }
+
+//for postgres but this is not best way
+//    CREATE FUNCTION get_total() RETURNS DOUBLE PRECISION AS $$
+//    BEGIN
+//    RETURN (SELECT COALESCE(SUM(p.price * od.amount), 0) FROM order_details od JOIN product p ON od.product_id = p.id WHERE od.order_id = id);
+//        END;
+//        $$ LANGUAGE plpgsql;
