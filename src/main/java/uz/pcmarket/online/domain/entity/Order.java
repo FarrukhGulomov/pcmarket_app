@@ -31,7 +31,6 @@ public class Order {
     private User user;
     @Getter(AccessLevel.NONE)
     @Setter
-    @Formula("get_total()") // not best way
     private Double total=0D;
 
 
